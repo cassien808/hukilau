@@ -9,13 +9,22 @@
   <button id="emailBtn">Email my reflection</button>
 
   <script>
-    const RECIPIENT = "recipient@example.com";   // <-- change this
-    const SUBJECT = "Course Reflection";         // <-- optional
+    const SUBJECT = "Course Reflection"; // You can customize this
 
     document.getElementById("emailBtn").addEventListener("click", () => {
       const msg = document.getElementById("reflection").value || "";
-      const mailto = `mailto:${encodeURIComponent(RECIPIENT)}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(msg)}`;
-      window.location.href = mailto;
+      if (!msg.trim()) {
+        alert("Please enter your reflection before emailing.");
+        return;
+      }
+      // Prompt the user for their email
+      const recipient = prompt("Enter your email address to send your reflection:");
+      if (recipient && /^[^@]+@[^@]+\.[^@]+$/.test(recipient.trim())) {
+        const mailto = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(msg)}`;
+        window.location.href = mailto;
+      } else if (recipient !== null) {
+        alert("Please enter a valid email address.");
+      }
     });
   </script>
 </body>
