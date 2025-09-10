@@ -16,26 +16,26 @@
   </form>
   <div id="result-message"></div>
   <script>
-    // Initialize EmailJS with your Public Key
-    (function(){
+    window.onload = function() {
+      // Initialize EmailJS with your Public Key
       emailjs.init("xbrRnblqLJkUZOa-y"); // Your actual EmailJS public key
-    })();
 
-    document.getElementById('reflection-form').addEventListener('submit', function(event) {
-      event.preventDefault();
+      document.getElementById('reflection-form').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-      // These IDs must match the variables in your EmailJS template
-      const serviceID = 'service_nyv0e7q';
-      const templateID = 'template_n8xvr3h';
+        // These IDs must match the variables in your EmailJS template
+        const serviceID = 'service_nyv0e7q';
+        const templateID = 'template_n8xvr3h';
 
-      emailjs.sendForm(serviceID, templateID, this)
-        .then(() => {
-          document.getElementById('result-message').innerHTML = "Reflection sent! Please check your inbox.";
-          document.getElementById('reflection-form').reset();
-        }, (err) => {
-          document.getElementById('result-message').innerHTML = "Failed to send reflection. Please try again.";
-        });
-    });
+        emailjs.sendForm(serviceID, templateID, this)
+          .then(() => {
+            document.getElementById('result-message').innerHTML = "Reflection sent! Please check your inbox.";
+            document.getElementById('reflection-form').reset();
+          }, (err) => {
+            document.getElementById('result-message').innerHTML = "Failed to send reflection. Please try again.";
+          });
+      });
+    };
   </script>
 </body>
 </html>
