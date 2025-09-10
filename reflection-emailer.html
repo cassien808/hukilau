@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reflection Emailer</title>
+</head>
+<body>
+  <textarea id="reflection" placeholder="Type your reflection..." rows="8" style="width:100%"></textarea>
+  <button id="emailBtn">Email my reflection</button>
+
+  <script>
+    const RECIPIENT = "recipient@example.com";   // <-- change this
+    const SUBJECT = "Course Reflection";         // <-- optional
+
+    document.getElementById("emailBtn").addEventListener("click", () => {
+      const msg = document.getElementById("reflection").value || "";
+      const mailto = `mailto:${encodeURIComponent(RECIPIENT)}?subject=${encodeURIComponent(SUBJECT)}&body=${encodeURIComponent(msg)}`;
+      window.location.href = mailto;
+    });
+  </script>
+</body>
+</html>
