@@ -4,26 +4,18 @@
   <meta charset="UTF-8" />
   <title>Reflection Emailer</title>
   <!-- EmailJS SDK -->
-  <script src="https://cdn.emailjs.com/sdk/3.11.0/email.min.js"></script>
-</head>
-<body>
-  <form id="reflection-form">
-    <textarea id="reflection" name="reflection" placeholder="Type your reflection..." rows="8" style="width:100%"></textarea>
-    <br>
-    <input type="email" id="user_email" name="user_email" placeholder="Your email" required />
-    <br>
-    <button type="submit">Email my reflection</button>
-  </form>
-  <div id="result-message"></div>
-  <script>
-    window.onload = function() {
-      // Initialize EmailJS with your Public Key
-      emailjs.init("xbrRnblqLJkUZOa-y"); // Your actual EmailJS public key
+  <script src="https://cdn.emailjs.com/sdk/3.11.0/email.min.js" defer></script>
+  <script defer>
+    window.addEventListener('DOMContentLoaded', function() {
+      if (typeof emailjs === 'undefined') {
+        document.body.innerHTML += "<div style='color:red;'>EmailJS SDK failed to load. Check your network or try reloading.</div>";
+        return;
+      }
+      emailjs.init("xbrRnblqLJkUZOa-y");
 
       document.getElementById('reflection-form').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        // These IDs must match the variables in your EmailJS template
         const serviceID = 'service_nyv0e7q';
         const templateID = 'template_n8xvr3h';
 
@@ -35,7 +27,17 @@
             document.getElementById('result-message').innerHTML = "Failed to send reflection. Please try again.";
           });
       });
-    };
+    });
   </script>
+</head>
+<body>
+  <form id="reflection-form">
+    <textarea id="reflection" name="reflection" placeholder="Type your reflection..." rows="8" style="width:100%"></textarea>
+    <br>
+    <input type="email" id="user_email" name="user_email" placeholder="Your email" required />
+    <br>
+    <button type="submit">Email my reflection</button>
+  </form>
+  <div id="result-message"></div>
 </body>
 </html>
